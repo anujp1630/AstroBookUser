@@ -217,6 +217,7 @@ const Home = ({
                   {/* {OtherExperts()} */}
                   {/* {blogsInfo()} */}
                   {mallInfo()}
+                  {OurCustomers()}
                   {MyBlogs()}
 
                   {/* {astropooja()} */}
@@ -1035,6 +1036,83 @@ const Home = ({
   //     </ScrollView>
   //   );
   // }
+  function OurCustomers() {
+
+    const images = {
+      samagri: require('../../assets/images/myblog1.jpg'),
+      flowers: require('../../assets/images/myblog2.jpg'),
+      heart: require('../../assets/images/myblog1.jpg'),
+      heart2: require('../../assets/images/myblog2.jpg'),
+
+
+    };
+
+    const DATA = [
+      { id: '1', image: images.samagri, title: 'Decoding Astrobook’s fortune: How the astrology startup hit success by blending ancient', Date: '1-nov-24', Name: "Acharya Anuj " },
+      { id: '2', image: images.flowers, title: 'Decoding Astrobook’s fortune: How the astrology startup hit success by blending ancient', Date: '1-nov-24', Name: "shiva," },
+      { id: '3', image: images.heart, title: 'Decoding Astrobook’s fortune: How the astrology startup hit success by blending ancient', Date: '1-nov-24', Name: "acgarya" },
+      { id: '4', image: images.heart2, title: 'Decoding Astrobook’s fortune: How the astrology startup hit success by blending ancient', Date: '1-nov-24', Name: "acharya" },
+
+    ];
+
+    const renderItem = ({ item }) => {
+      return (
+
+
+        <View style={{ borderWidth: 1, height: SCREEN_HEIGHT * 0.18, width: SCREEN_WIDTH * 0.6, borderRadius: 10, alignItems: "center", borderColor: "#A9A9A9", elevation1: 2, marginHorizontal: SCREEN_WIDTH * 0.01 }}>
+
+          <View style={{ width: SCREEN_WIDTH * 0.6, height: SCREEN_HEIGHT * 0.12, alignItems: "center", justifyContent: "center" }}>
+            <Image
+              style={{ width: SCREEN_WIDTH * 0.6, height: SCREEN_HEIGHT * 0.12, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
+              source={item.image} />
+          </View>
+
+          <View style={{ paddingTop: SCREEN_HEIGHT * 0.001, width: SCREEN_WIDTH * 0.6, paddingHorizontal: SCREEN_WIDTH * 0.015, justifyContent: "center" ,paddingTop:SCREEN_HEIGHT*0.005,alignItems:"center"}}>
+            <Text style={{ ...Fonts.primaryDark11InterMedium, fontSize: 9, color: colors.black_color9, }}>{item?.title}</Text>
+          </View>
+         
+
+        </View>
+
+      )
+    }
+    return (
+      <View style={{ backgroundColor: colors.white_color, elevation: 10, paddingBottom: SCREEN_HEIGHT * 0.02, paddingTop: SCREEN_HEIGHT * 0.01 }}>
+
+        <View style={{ paddingHorizontal: SCREEN_WIDTH * 0.02, paddingVertical: SCREEN_HEIGHT * 0.01 }}>
+          <View style={styles.orderSubView}>
+            <Text style={styles.orderText}>Our Customers</Text>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              // onPress={() => navigation.navigate('AstrologyBlog')}
+
+            >
+              <Text style={styles.orderBtn}>View All</Text>
+            </TouchableOpacity>
+
+          </View>
+        </View>
+
+        <View style={{ paddingHorizontal: SCREEN_WIDTH * 0.02 }}>
+
+          <FlatList
+            horizontal={true}
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            showsHorizontalScrollIndicator={false}
+          />
+
+        </View>
+
+
+
+      </View>
+    )
+  }
+
+
+
   function MyBlogs() {
 
     // const images = {
