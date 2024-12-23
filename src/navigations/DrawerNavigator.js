@@ -290,7 +290,12 @@ function CustomDrawerContent(props,) {
                 }else if (item?.title === "AstroMall") {
                   
                   navigation.navigate("products",{ ...item });
-                } else {
+                } 
+                else if (item?.title === "My Following") {
+                  
+                  navigation.navigate("following");
+                }
+                else {
                   info_toast("Coming Soon")
                 }
               }} 

@@ -144,6 +144,7 @@ import AddAddress from '../screens/ecommerce/AddAddress';
 import AstrologyBlog from '../screens/AstrologyBlog';
 import BlogDescription from '../screens/BlogDescription';
 import AstroBookHeader from '../components/AstroBookHeader';
+import InitiateScreen from '../screens/InitiateScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -266,6 +267,7 @@ const StackNavigator = (data, data1) => {
       <Stack.Screen name="astrologerDetailes" component={AstrologerDetailes} />
       <Stack.Screen name="wallet" component={Wallet} />
       <Stack.Screen name="billHistory" component={BillHistory} />
+      <Stack.Screen name="InitiateScreen" component={InitiateScreen} options={{headerShown:false}} />
      
       <Stack.Screen
         name="customerOrderHistory"

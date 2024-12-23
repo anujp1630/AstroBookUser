@@ -62,9 +62,9 @@ const AstrologerDetailes = ({
 
 
   const [isExpanded, setIsExpanded] = useState(false);
-    useEffect(() => {
-      dispatch(CustomerActions.getWalletRechargeOfferList())
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(CustomerActions.getWalletRechargeOfferList())
+  }, [dispatch]);
   const refRBSheet = useRef();
   const [selectedOffer, setSelectedOffer] = useState(null);
 
@@ -122,6 +122,7 @@ const AstrologerDetailes = ({
           ListHeaderComponent={
             <>
               {astroData && astroDetailInfo()}
+              {anuj()}
               {/* {astroData?.astrologer && chatCallPriceInfo()} */}
               {/* {astroData?.astrologer?.nextOnline?.date && nextOnlineInfo()} */}
               {astroData && totalMin()}
@@ -197,9 +198,9 @@ const AstrologerDetailes = ({
                   a very simple language</Text>
               </View>
 
-              <View style={{backgroundColor:"#F4F4F4",padding:4,borderRadius:5,paddingHorizontal:10,}}>
-                <Text  style={{ ...Fonts.primaryHelvetica, color: "#000",fontSize:10  }}>{astroData?.astrologer?.astrologerName}</Text>
-                <Text  style={{ ...Fonts.primaryHelvetica, color: "#848484",fontSize:9  }}>Thanks 🙏 </Text>
+              <View style={{ backgroundColor: "#F4F4F4", padding: 4, borderRadius: 5, paddingHorizontal: 10, }}>
+                <Text style={{ ...Fonts.primaryHelvetica, color: "#000", fontSize: 10 }}>{astroData?.astrologer?.astrologerName}</Text>
+                <Text style={{ ...Fonts.primaryHelvetica, color: "#848484", fontSize: 9 }}>Thanks 🙏 </Text>
               </View>
             </View>
           )
@@ -527,21 +528,29 @@ const AstrologerDetailes = ({
     )
   }
   function totalMin() {
- console.log("astroData?.astrologer?.",astroData?.totalChatTime)
+    console.log("astroData?.astrologer?.", astroData?.totalChatTime)
     return (
       <View style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
         <View style={styles.minView}>
           <Image source={require('../../assets/astrobookimages/chat_detail.png')} style={styles.callImage} />
           <Text style={{ ...Fonts.primaryHelvetica, color: "#000", fontSize: 14, }}>
-          {Math.floor((astroData?.totalChatTime || 0) / 60)} mins</Text>
+            {Math.floor((astroData?.totalChatTime || 0) / 60)} mins</Text>
         </View>
         <View style={styles.minView}>
           <Image source={require('../../assets/astrobookimages/phone_detail.png')} style={styles.callImage} />
           <Text style={{ ...Fonts.primaryHelvetica, color: "#000", fontSize: 14, }}>
-          {Math.floor((astroData?.totalCallTime || 0) / 60)} mins</Text>
+            {Math.floor((astroData?.totalCallTime || 0) / 60)} mins</Text>
         </View>
       </View>
 
+    )
+  }
+
+  function anuj() {
+    return (
+      <View style={{ alignItems: "center" }}>
+
+      </View>
     )
   }
 
@@ -1022,7 +1031,9 @@ const AstrologerDetailes = ({
         flexDirection: "row",
         gap: 7,
         marginTop: 20,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+       
+        paddingVertical:SCREEN_HEIGHT*0.02
 
       }}>
 
@@ -1052,6 +1063,33 @@ const AstrologerDetailes = ({
           <Image source={require('../../assets/astrobookimages/tickverifires.png')}
             style={{ height: 20, width: 20, position: "absolute", right: responsiveScreenWidth(3), bottom: responsiveScreenHeight(2) }}
           />
+          <View style={{  alignItems: "center" ,top:SCREEN_HEIGHT*0.012 }}>
+            <TouchableOpacity
+              onPress={() => dispatch(AstrologerActions.onFollowUnfollowAstrologer(route?.params?._id))}
+              style={{
+                flex: 0,
+                width: SCREEN_WIDTH * 0.2,
+                height: SCREEN_HEIGHT * 0.025,
+                backgroundColor: colors.astrobook1,
+                borderRadius: 20,
+                alignItems: "center",
+                justifyContent: "center"
+              }}>
+              <Text
+                allowFontScaling={false}
+                style={{
+                  fontSize: getFontSize(1),
+                  color: colors.black_color,
+                  fontFamily: fonts.medium,
+                  textAlign: 'center',
+                }}>
+                {isFollow
+                  ? `${t('following')}`
+                  : `${t('follow')}`}
+                {/* {astroData?.astrologer?.follower_count} */}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View >
           <Text style={{ ...Fonts.primaryHelvetica, color: "#000", fontSize: 14, lineHeight: 20 }}>
@@ -1130,7 +1168,7 @@ const AstrologerDetailes = ({
 
 
     };
-    
+
     const onCallNow = () => {
       if (customerData?.wallet_balance < astroData?.astrologer?.call_price * 5) {
         refRBSheet.current.open()
@@ -1151,15 +1189,15 @@ const AstrologerDetailes = ({
         };
         dispatch(ChatActions.onChatNow(payload));
       }
-      
+
 
     };
 
     const onVideoCallNow = () => {
-      console.log(astroData?.astrologer?.video_call_price,"astroData?.astrologer?.call_price")
+      console.log(astroData?.astrologer?.video_call_price, "astroData?.astrologer?.call_price")
       if (customerData?.wallet_balance < astroData?.astrologer?.video_call_price * 5) {
         refRBSheet.current.open()
-      } else{
+      } else {
         if (astroData?.astrologer?.video_call_status != 'online') {
           showToastMessage({ message: `Astrologer is ${astroData?.astrologer?.video_call_status}` })
           return
@@ -1176,7 +1214,7 @@ const AstrologerDetailes = ({
         };
         dispatch(ChatActions.onChatNow(payload));
       }
-      
+
     }
     const comingsoon = () => {
       showToastMessage({ message: 'Feature Coming Soon' })

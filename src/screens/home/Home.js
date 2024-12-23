@@ -1084,7 +1084,7 @@ const Home = ({
             <Text style={styles.orderText}>Our Customers</Text>
             <TouchableOpacity
               activeOpacity={0.8}
-              // onPress={() => navigation.navigate('AstrologyBlog')}
+              onPress={() => navigation.navigate('InitiateScreen')}
 
             >
               <Text style={styles.orderBtn}>View All</Text>

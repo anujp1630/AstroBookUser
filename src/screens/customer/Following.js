@@ -14,7 +14,10 @@ import { base_url } from '../../config/constants';
 import { Sizes, Fonts, Colors } from '../../assets/style';
 import * as ChatActions from '../../redux/actions/ChatActions'
 import * as AstrologerActions from '../../redux/actions/AstrologerActions'
-import { SCREEN_HEIGHT } from '../../config/Screen';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../config/Screen';
+import StarRating from 'react-native-star-rating-widget';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -66,53 +69,91 @@ const Following = ({ navigation, route, dispatch, followingListData }) => {
     };
     dispatch(ChatActions.onChatNow(payload));
   }
-
+  const [rating, setRating] = useState(4);
   const renderItem = ({ item, index }) => {
-    console.log(item,'all data ')
+    console.log(item, 'all data ')
     return (
-      <TouchableOpacity
-        style={styles.container}
-        activeOpacity={0.6}
-        onPress={() =>
-          navigation.navigate('astrologerDetailes', {
-            _id: item?._id,
-          })}
-        >
-        <View style={[styles.row, { justifyContent: 'space-between' }]}>
-          <View style={styles.row} >
-            <Image source={{ uri: base_url + item?.profileImage }} style={{ width: width * 0.2, height: width * 0.2, borderRadius: 10000 }} />
-            <View style={{ marginLeft: Sizes.fixPadding }}>
-              <Text allowFontScaling={false} style={{ ...Fonts.primaryDark16RobotoMedium }}>{item.astrologerName}</Text>
-              <Text allowFontScaling={false} style={{ ...Fonts.gray12RobotoMedium }}>{item.gender}</Text>
-            </View>
-       
-        </View>
-        </View>
-          <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(AstrologerActions.onFollowUnfollowAstrologer(item?._id))} style={{...styles.actions,borderRadius:10}}>
-            <Text allowFontScaling={false} style={{ ...Fonts.black14InterMedium,color:Colors.white }}>Unfollow</Text>
-          </TouchableOpacity>
+      // <TouchableOpacity
+      //   style={styles.container}
+      //   activeOpacity={0.6}
+      //   onPress={() =>
+      //     navigation.navigate('astrologerDetailes', {
+      //       _id: item?._id,
+      //     })}
+      //   >
+      //   <View style={[styles.row, { justifyContent: 'space-between' }]}>
+      //     <View style={styles.row} >
+      //       <Image source={{ uri: base_url + item?.profileImage }} style={{ width: width * 0.2, height: width * 0.2, borderRadius: 10000 }} />
+      //       <View style={{ marginLeft: Sizes.fixPadding }}>
+      //         <Text allowFontScaling={false} style={{ ...Fonts.primaryDark16RobotoMedium }}>{item.astrologerName}</Text>
+      //         <Text allowFontScaling={false} style={{ ...Fonts.gray12RobotoMedium }}>{item.gender}</Text>
+      //       </View>
 
-        {/* <View style={styles.actionsContainer}>
-          <TouchableOpacity onPress={() => onChat(item)} style={styles.actions}>
-            <Text style={{ ...Fonts.white14RobotoMedium }}>Chat</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => onCall(item)} style={[styles.actions, { marginLeft: Sizes.fixPadding }]}>
-            <Text style={{ ...Fonts.white14RobotoMedium }}>Call</Text>
-          </TouchableOpacity>
-        </View> */}
+      //   </View>
+      //   </View>
+      //     <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(AstrologerActions.onFollowUnfollowAstrologer(item?._id))} style={{...styles.actions,borderRadius:10}}>
+      //       <Text allowFontScaling={false} style={{ ...Fonts.black14InterMedium,color:Colors.white }}>Unfollow</Text>
+      //     </TouchableOpacity>
 
-      </TouchableOpacity>
+      //   {/* <View style={styles.actionsContainer}>
+      //     <TouchableOpacity onPress={() => onChat(item)} style={styles.actions}>
+      //       <Text style={{ ...Fonts.white14RobotoMedium }}>Chat</Text>
+      //     </TouchableOpacity>
+      //     <TouchableOpacity onPress={() => onCall(item)} style={[styles.actions, { marginLeft: Sizes.fixPadding }]}>
+      //       <Text style={{ ...Fonts.white14RobotoMedium }}>Call</Text>
+      //     </TouchableOpacity>
+      //   </View> */}
+
+      // </TouchableOpacity>
+      <View style={{  flexDirection: "row" ,paddingVertical:SCREEN_HEIGHT*0.01,borderRadius:10,backgroundColor:"white",elevation:10,marginVertical:SCREEN_HEIGHT*0.01}}>
+
+        <View style={{ alignItems:"center",gap:SCREEN_HEIGHT*0.001,paddingHorizontal:SCREEN_WIDTH*0.025}}>
+
+          <View style={{ width: width * 0.26, height: width * 0.26, borderWidth: 1.5, borderRadius: 100, alignItems: "center", justifyContent: "center",borderColor:colors.astrobook1 }}>
+            <Image source={{ uri: base_url + item?.profileImage }} style={{ width: width * 0.25, height: width * 0.25, borderRadius: 100, }} />
+          </View>
+
+          <StarRating
+            rating={rating}
+            onChange={setRating}
+            starStyle={{ marginHorizontal: 0 }}
+            starSize={16}
+          />
+
+          <View style={{ flexDirection: "row", gap: SCREEN_WIDTH * 0.01, alignItems: "center" }}>
+
+            <Ionicons name='person' color={colors.black_color7} size={8} />
+
+            <Text style={{ ...Fonts.black11InterMedium, fontSize: responsiveFontSize(1) }}>15550 Orders</Text>
+          </View>
+
+        </View>
+
+        <View style={{gap:SCREEN_HEIGHT*0.002,paddingHorizontal:SCREEN_WIDTH*0.015,paddingVertical:SCREEN_HEIGHT*0.01}}>
+          <Text style={{...Fonts.black11InterMedium,fontSize:responsiveFontSize(2)}}>{item.astrologerName}</Text>
+          <Text style={{...Fonts.black12RobotoRegular,fontSize:responsiveFontSize(1.6)}}>Numerlogy,Vastu,Tarot,face Reading...</Text>
+          <Text style={{...Fonts.black12RobotoRegular,fontSize:responsiveFontSize(1.6)}}>{item.language}</Text>
+          <Text style={{...Fonts.black12RobotoRegular,fontSize:responsiveFontSize(1.6)}}>Exp:5 Years</Text>
+          <View style={{flexDirection:"row",justifyContent:"flex-end",}}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(AstrologerActions.onFollowUnfollowAstrologer(item?._id))} style={{ borderWidth:1,width:SCREEN_WIDTH*0.3,alignItems:"center" ,height:SCREEN_HEIGHT*0.05,justifyContent:"center",borderRadius:15,backgroundColor:colors.astrobook1,borderColor:colors.white_color}}>
+              <Text allowFontScaling={false} style={{ ...Fonts.black14InterMedium, color: Colors.white }}>Unfollow</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+      </View>
     );
   };
 
   const _listEmptyComponent = () => {
     return (
-      <View style={{ height:SCREEN_HEIGHT * 0.8,justifyContent:'center',alignItems:'center'}}>
+      <View style={{ height: SCREEN_HEIGHT * 0.8, justifyContent: 'center', alignItems: 'center' }}>
         <Text allowFontScaling={false} style={{
           fontSize: 16,
           color: colors.black_color,
           fontFamily: fonts.medium,
-          textAlign: 'center' }}>You Have Not Followed Anyone Yet</Text>
+          textAlign: 'center'
+        }}>You Have Not Followed Anyone Yet</Text>
         {/* <Image  source={require('../../assets/images/icon/novideo.png')} 
               style={{width:300,height:300,borderRadius:20}}/> */}
       </View>
@@ -120,7 +161,7 @@ const Following = ({ navigation, route, dispatch, followingListData }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.black_color1 }}>
+    <View style={{ flex: 1, backgroundColor: colors.book_status_bar }}>
       <MyLoader isVisible={isLoading} />
       {followingListData && (
         <FlatList
@@ -177,7 +218,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: Sizes.fixPadding * 0.8,
-    alignSelf:'flex-end'
+    alignSelf: 'flex-end'
   }
 
 })
