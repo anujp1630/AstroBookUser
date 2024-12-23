@@ -9,6 +9,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import * as EcommerceActions from '../../redux/actions/ecommerceActions'
 import { connect } from 'react-redux'
 import { img_url } from '../../config/constants'
+import { colors } from '../../config/Constants1'
+import { responsiveFontSize } from 'react-native-responsive-dimensions'
 
 const Cart = ({ navigation, dispatch, cartData,addressSelect }) => {
     console.log(addressSelect,'data')
@@ -21,7 +23,7 @@ const Cart = ({ navigation, dispatch, cartData,addressSelect }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: Colors.whiteDark }}>
-            <MyStatusBar backgroundColor={Colors.primaryDark} barStyle={'light-content'} />
+            <MyStatusBar backgroundColor={colors.book_status_bar} barStyle={'dark-content'} />
             <MyHeader title={'Cart'} navigation={navigation} />
             <View style={{ flex: 1 }}>
                 <FlatList ListHeaderComponent={<>
@@ -42,7 +44,7 @@ const Cart = ({ navigation, dispatch, cartData,addressSelect }) => {
             <View>
                 <Text style={{color:'black',fontSize:16}}>Address:</Text>
                 <Text style={{}}>{addressSelect?.house}, {addressSelect?.area}, {'\n'} {addressSelect?.city}, {addressSelect?.state} ,{addressSelect?.pincode}</Text>
-                <Text style={{color:'black',fontSize:18, fontWeight:'bold'}}>Phone Number: {addressSelect?.phone}</Text>
+                <Text style={{...Fonts.black11InterMedium,fontSize:responsiveFontSize(1.7),color:"gray"}}>Phone Number: {addressSelect?.phone}</Text>
             </View>
         )
     }
@@ -51,17 +53,17 @@ const Cart = ({ navigation, dispatch, cartData,addressSelect }) => {
         return (
             <TouchableOpacity 
             onPress={() => navigation.navigate('Address')}
-            style={{alignItems: 'center', backgroundColor: Colors.primaryDark,paddingVertical: Sizes.fixPadding * 2}}>
-                <Text style={{color:'white',fontSize:17,fontWeight:'bold'}}>Add Address</Text>
+            style={{alignItems: 'center', backgroundColor: colors.astrobook1,paddingVertical: Sizes.fixPadding * 2}}>
+                <Text style={{color:'black',fontSize:17,fontWeight:'bold'}}>Add Address</Text>
             </TouchableOpacity>
         )
     }
 
     function submitInfo() {
         return (
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.primaryDark, justifyContent: 'space-between', paddingVertical: Sizes.fixPadding * 0.5, paddingHorizontal: Sizes.fixPadding }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor:colors.astrobook1, justifyContent: 'space-between', paddingVertical: Sizes.fixPadding * 0.5, paddingHorizontal: Sizes.fixPadding }}>
                 <View>
-                    <Text style={{ ...Fonts.black16RobotoMedium, color: Colors.white }}>Total: {showNumber(cartData?.totalPrice)}</Text>
+                    <Text style={{ ...Fonts.black16RobotoMedium, color: Colors.black }}>Total: {showNumber(cartData?.totalPrice)}</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => dispatch(EcommerceActions.orderCart())} style={{ width: '40%', borderRadius: Sizes.fixPadding, backgroundColor: Colors.white, paddingVertical: Sizes.fixPadding }}>
                     <Text style={{ ...Fonts.black16RobotoMedium, textAlign: 'center' }}>Pay</Text>

@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import { base_url, img_url } from '../../config/constants'
 import { responsiveFontSize } from 'react-native-responsive-dimensions'
 const Products = ({ navigation, route, productsData, dispatch }) => {
-    console.log(productsData)
+    console.log(productsData,"anuj")
     const { _id, categoryName } = route?.params
 
     useEffect(() => {

@@ -227,7 +227,8 @@ export const colors = {
   background_theme3: '#bdd3ff',
   orange_color: '#7d0300',
    header_background:"#DCDCDC70",
-  book_status_bar:"#DCDCDC70"
+  book_status_bar:"#DCDCDC70",
+  astrobook1:"#F1B646"
   
 };
 

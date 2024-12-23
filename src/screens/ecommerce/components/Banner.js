@@ -13,13 +13,13 @@ const Banner = ({data}) => {
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderWidth:1
+                   
                 }}>
                 <Image
                     source={{ uri: base_url + item }}
-                    style={{ width: SCREEN_WIDTH * 0.95, height: SCREEN_WIDTH / 2.3, borderRadius: 10 , }}
+                    style={{ width: SCREEN_WIDTH * 0.9, height: SCREEN_WIDTH / 2.3, borderRadius: 10 , }}
                     // resizeMode="stretch"
-                    resizeMode='contain'
+               
                 />
             </TouchableOpacity>
         );

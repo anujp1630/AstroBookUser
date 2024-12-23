@@ -44,7 +44,7 @@ import * as HomeActions from '../redux/actions/HomeActions';
 import { info_toast } from '../components/MyToastMessage';
 
 
-function CustomDrawerContent(props) {
+function CustomDrawerContent(props,) {
   console.log("props", props)
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -148,6 +148,10 @@ function CustomDrawerContent(props) {
     },
     {
       title: "Book a Pooja",
+      image: require('../assets/astrobookimages/drawer/pooja.png')
+    },
+    {
+      title: "AstroMall",
       image: require('../assets/astrobookimages/drawer/pooja.png')
     },
     {
@@ -283,7 +287,10 @@ function CustomDrawerContent(props) {
                   navigation.navigate("home3")
                 }else if(item?.title == "Astrologer Order History"){
                   navigation.navigate("liveChatCall")
-                }else{
+                }else if (item?.title === "AstroMall") {
+                  
+                  navigation.navigate("products",{ ...item });
+                } else {
                   info_toast("Coming Soon")
                 }
               }} 

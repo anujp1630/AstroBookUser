@@ -216,7 +216,7 @@ const Home = ({
                   {/* {videoCallAstrolgoer && videoCallAstrologerList()} */}
                   {/* {OtherExperts()} */}
                   {/* {blogsInfo()} */}
-                  {/* {mallInfo()} */}
+                  {mallInfo()}
                   {MyBlogs()}
 
                   {/* {astropooja()} */}
